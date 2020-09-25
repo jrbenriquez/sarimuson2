@@ -1,0 +1,14 @@
+*.sqlite3
+**/__pycache__
+/.idea
+db.sqlite3
+/jrbenriquez/static/vue/
+/media
+/static
+.DS_Store
+.env
+.mypy_cache/
+*/webpack-stats.json
+.rc
+/staticfiles
+*/node_modules
