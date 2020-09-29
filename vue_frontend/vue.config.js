@@ -1,5 +1,4 @@
 const BundleTracker = require("webpack-bundle-tracker");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 
 const pages = {
