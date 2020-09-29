@@ -1,5 +1,8 @@
 from django.db import models
 
+DEFAULT_STOCK_NAME = "Default Stock"
+DEFAULT_QUANTITY = ("pc", "Piece")
+
 
 class Item(models.Model):
     name = models.CharField(max_length=100)
@@ -14,6 +17,15 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if not self.stocks.all():
+            try:
+                qty_unit = QuantityUnit.objects.get(short_name=DEFAULT_QUANTITY[0])
+            except QuantityUnit.DoesNotExist:
+                qty_unit = QuantityUnit.objects.create(name=DEFAULT_QUANTITY[1], short_name=DEFAULT_QUANTITY[0])
+            ItemStock.objects.create(item=self, description=DEFAULT_STOCK_NAME, quantity=1, quantity_unit=qty_unit)
 
 
 class ItemStock(models.Model):
