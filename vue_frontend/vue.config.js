@@ -7,6 +7,10 @@ const pages = {
         entry: './src/sarimuson/entry/main.js',
         chunks: ['chunk-common']
     },
+    'new-purchase': {
+        entry: './src/sarimuson/entry/purchase/newPurchase.js',
+        chunks: ['chunk-common']
+    },
 }
 
 module.exports = {

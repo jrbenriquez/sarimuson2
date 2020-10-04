@@ -3,7 +3,7 @@ plan
 **/__pycache__
 /.idea
 db.sqlite3
-/jrbenriquez/static/vue/
+/sarimuson/static/vue/
 /media
 /static
 .DS_Store

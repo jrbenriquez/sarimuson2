@@ -4,13 +4,11 @@
 
 {% block content %}
 
-<div id="app">
-    <home
-     purchase-add="{% url 'new-purchase' %}"
-    ></home>
+<div id="newpurchase">
+    <new-purchase greeting="Hello"></new-purchase>
 </div>
 
 {% render_bundle 'chunk-common' %}
-{% render_bundle 'main' %}
+{% render_bundle 'new-purchase' %}
 
 {% endblock content %}
