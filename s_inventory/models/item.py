@@ -44,3 +44,12 @@ class QuantityUnit(models.Model):
 
     def __str__(self):
         return f"{self.short_name}"
+
+
+class QuantityUnitPrice(models.Model):
+    stock = models.OneToOneField('s_inventory.ItemStock', related_name='price', on_delete=models.CASCADE)
+    quantity_unit = models.ForeignKey('s_inventory.QuantityUnit', related_name='+', on_delete=models.CASCADE)
+    value = models.DecimalField(max_digits=11, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.stock.item.name}-{self.value}"
