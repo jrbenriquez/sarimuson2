@@ -1,73 +1,43 @@
 <!-- TODO Refactor to Dashboard Component -->
 <!-- TODO Dynamically swap from Dashboard and NewPurchase Component -->
 <!-- Check here https://medium.com/js-dojo/simply-switching-in-between-the-components-dynamically-vue-js-a436fe10008a -->
-
 <template>
     <div class="md:mx-20">
-        <el-row class="flex justify-around mt-10">
-            <el-button type="success" v-on:click="goToNewPurchase" round>+ Quick Purchase</el-button>
-            <el-button type="success" v-on:click="goToNewPurchase" round>+ New Purchase</el-button>
-        </el-row>
-        <summary-section/>
-        <recent-purchases-table />
+        <component
+          v-on:open-new-purchase="goTo('new-purchase')"
+          v-on:close-new-purchase="goTo('dashboard')"
+          :is="renderedComponent" :purchaseAdd=purchaseAdd />
     </div>
 </template>
 
 <script>
-  import SummarySection from "./SummarySection.vue";
-  import RecentPurchasesTable from "./RecentPurchasesTable.vue";
+  import Dashboard from './dashboard/Dashboard.vue';
+  import NewPurchase from '../purchase/NewPurchase.vue';
   export default {
     name: 'Home',
-    components: {SummarySection, RecentPurchasesTable},
+    components: {Dashboard, NewPurchase},
     props: {
       purchaseAdd: String
     },
-    methods: {
-      goToNewPurchase: function () {
-        window.location.href = this.purchaseAdd;
-      },
-    },
     data() {
       return {
-        tableData: [{
-          date: '2016-05-03',
-          purchase_id: 'Tom',
-          items: 'California',
-          quantity: 'Los Angeles',
-          total: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-03',
-          purchase_id: 'Tom',
-          items: 'California',
-          quantity: 'Los Angeles',
-          total: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-03',
-          purchase_id: 'Tom',
-          items: 'California',
-          quantity: 'Los Angeles',
-          total: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-03',
-          purchase_id: 'Tom',
-          items: 'California',
-          quantity: 'Los Angeles',
-          total: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-03',
-          purchase_id: 'Tom',
-          items: 'California',
-          quantity: 'Los Angeles',
-          total: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-03',
-          purchase_id: 'Tom',
-          items: 'California',
-          quantity: 'Los Angeles',
-          total: 'No. 189, Grove St, Los Angeles',
-      }]
+        currentComponent: 'dashboard'
       }
-    }
+    },
+    computed: {
+      renderedComponent() {
+        if (this.currentComponent === 'new-purchase') {
+          return 'new-purchase';
+        } else {
+          return 'dashboard';
+        }
+      },
+    },
+    methods: {
+      goTo(componentName) {
+        this.currentComponent = componentName;
+      }
+    },
   }
 </script>
 
