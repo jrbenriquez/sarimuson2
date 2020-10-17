@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.forms import IntegerField
 from django.forms.models import BaseInlineFormSet
 
 from s_inventory.models import DEFAULT_STOCK_NAME
@@ -9,6 +10,7 @@ from s_inventory.models import QuantityUnit
 
 
 class ItemStockInlineFormSet(BaseInlineFormSet):
+
     def __init__(self, *args, **kwargs):
         kwargs["initial"] = [
             {
